@@ -17,11 +17,17 @@ function validateUserInput(req, res, next) {
   next();
 }
 
-function checkArticleAccess(req, res, next) {
-  console.log(`Checking article access for user... ${req.params.articleId} || ''}`);
+function logRequest(req, res, next) {
+  console.log(`${new Date().toISOString()} - ${req.method} request to ${req.url}`);
+  next();
 }
 
-module.exports = { basicAuth, checkArticleAccess, validateUserInput };
+function checkArticleAccess(req, res, next) {
+  console.log(`Checking article access for user... ${req.params.articleId} || 'all'}`);
+next();
+}
+
+module.exports = { basicAuth, checkArticleAccess, validateUserInput, logRequest };
 
 
 
